@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Kourti</title>
+  <link rel="stylesheet" href="<%= assets_path('css/screen.css') %>">
+
+
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<%= yield %>
+
+  <script type="text/javascript" src="<%= assets_path('js/lib.js') %>"></script>
+  <script type="text/javascript" src="<%= assets_path('js/templates.js') %>"></script>
+  <script type="text/javascript" src="<%= assets_path('js/core.js') %>"></script>
+  <script type="text/javascript">
+      SharedApp.main.init();
+  </script>
+</body>
+</html>

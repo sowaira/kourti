@@ -1,0 +1,4 @@
+SharedApp.main = {
+    init: function () {
+    }
+};

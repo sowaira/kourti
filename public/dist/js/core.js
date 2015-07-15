@@ -1,0 +1,1 @@
+SharedApp={};SharedApp.Views={};SharedApp.Models={};$('meta[name="csrf-token"]').length&&$.ajaxSetup({beforeSend:function(a){a.setRequestHeader("X-CSRF-Token",$('meta[name="csrf-token"]').attr("content"))}});SharedApp.main={init:function(){}};
