@@ -1,0 +1,15 @@
+
+<% @lines.each do |line| %>
+	<% if line.escales.size != 0 %>
+		<%= line.heure_depart.strftime("%H:%M") %> , <%= line.heure_arrive.strftime("%H:%M") %> , <%= line.prix%> DHs , <%= line.ville_depart.name%> ---> <%= line.ville_arrive.name%> 
+	<% end %>
+	<%= link_to "Modifier", edit_line_path(line.id) %>
+	<%= link_to "Supprimer", remove_line_path(line.id) %>
+	<br>
+	<% line.escales.order("order_escale asc").each do |escale| %>
+		<%= escale.ville.name %> ---> 
+	<% end %> 
+<br>
+-----------------------------------------------
+<br>
+<% end %>

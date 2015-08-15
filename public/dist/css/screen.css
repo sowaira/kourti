@@ -1,0 +1,17 @@
+.tp-container {
+  width: 100%; }
+
+.tp-col {
+  float: left;
+  width: 50%; }
+
+.tp-width-1 {
+  width: 100%; }
+
+.tp-input {
+  font-size: 20px;
+  width: 25px; }
+
+.tp-center-block {
+  text-align: center;
+  margin: 0 auto; }

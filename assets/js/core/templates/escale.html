@@ -1,0 +1,6 @@
+escale
+<select name="escale[escale_ville_id][]" >
+	<% for (i = 0; i< villes.length; i++){ %>
+		<option value="<%= villes[i].id %>"><%=ville.name%></option>
+	<%  } %>
+</select><br>

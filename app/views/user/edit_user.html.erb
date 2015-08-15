@@ -1,0 +1,17 @@
+<%= form_tag update_user_path, method: "post" do %>
+	
+		Nom : <input type="text" value="<%= @user.name%>" name="user[name]" > <br>
+		Adresse :<input type="text" value="<%= @user.adresse%>" name="user[adresse]" ><br>
+		<% @user.tels.each_with_index do |tel , index| %>
+			Tel_<%= index + 1 %> : <input type="text" value="<%=tel.number%>" name="user[tel_numbers][]" >
+			<input type="hidden" value="<%=tel.id%>" name="user[tel_ids][]" ><br>
+		<% end %>
+
+
+		
+		Utilisateur : <input type="text" value="<%= @user.username%>" name="user[username]" ><br>
+		Mot de passe : <input type="password" value=="<%= @user.password%>" name="user[password]"><br>
+	
+	<input type="submit" value= "Modifier" ><br>
+
+<% end %>

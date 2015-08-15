@@ -1,0 +1,7 @@
+<%= @user.username %>
+<% if @user.type_user == 0 %>
+	<%= link_to "Ajouter un nouveau car", new_car_path %>
+	<%= link_to "Ajouter une ligne", new_line_path %>
+<% elsif @user.type_user == 1 %>
+	<%= link_to "Modifier le profile", edit_user_path %>
+<%end%>

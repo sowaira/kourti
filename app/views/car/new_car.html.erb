@@ -1,0 +1,24 @@
+<% 
+	action = ""
+	method = ""
+
+
+	if ["new_car"].include? @action_name
+		action = create_car_path
+	elsif ["edit_car"].include? @action_name
+		action = update_car_path
+	end
+%>
+<%= form_tag action, method: "post" do %>
+	 Nom : <input type="text" name="car[name]" value="<%= @car.name if  @car%>" > <br>
+
+	<% if ["new_car"].include? @action_name 
+		valeur = "Ajouter" 
+		elsif ["edit_car"].include? @action_name
+		valeur ="Modifier"
+	 end %>
+	<input type="submit" value= "<%= valeur %>" ><br>
+<% end %>
+
+<%= link_to 'return to profile', profile_path %>
+

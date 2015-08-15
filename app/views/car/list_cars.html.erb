@@ -1,0 +1,7 @@
+
+
+<% @cars.each do |car| %>
+	<%= car.name %> <%= link_to "Edit", edit_car_path(car.id) %> <%= link_to "Remove", remove_car_path(car.id) %>  <br> 
+<% end %>
+ 
+

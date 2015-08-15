@@ -1,0 +1,34 @@
+<% 
+	action = ""
+	method = ""
+	if ["signup"].include? @action_name
+		action = create_user_path
+	elsif ["login"].include? @action_name
+		action = new_session_path
+	end
+%>
+<%= form_tag action, method: "post" do %>
+	
+	<% if ["signup"].include? @action_name %>
+		Nom : <input type="text" name="user[name]" > <br>
+		Adresse :<input type="text" name="user[adresse]" ><br>
+		<select name="user[type_user]" >
+			<option value="0">Société</option>
+			<option value="1">Utilisateur normal</option>
+		</select><br>
+		Tel : <input type="text" name="user[tel][]" ><br>
+	<% end  %>
+
+	<% if ["login", "signup"].include? @action_name %>
+		Utilisateur : <input type="text" name="user[username]" ><br>
+		Mot de passe : <input type="password" name="user[password]" ><br>
+	<% end %>
+	<% if ["signup"].include? @action_name 
+		valeur = "Signup" 
+		elsif ["login"].include? @action_name
+		valeur ="Connexion"
+	 end %>
+	<input type="submit" value= "<%= valeur %>" ><br>
+
+<% end %>
+
