@@ -1,0 +1,1 @@
+var Ville = Backbone.Model.extend({});

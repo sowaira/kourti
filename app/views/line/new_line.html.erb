@@ -1,128 +1,97 @@
 <%= content_for :js do %>
 	<script type="text/javascript">
 		$(function() {
-		  	$(".js-add-escale").click(function() {
-		  		var escaleTemplate = $(".js-escale-template").clone();
-		  		escaleTemplate.show();
-		  		escaleTemplate.removeClass("js-escale-template");
-		  		
-		  		$(".js-escales").append(escaleTemplate);
-
-		  		escaleTemplate.find(".js-remove-escale").click(function() {
-			   		$this = $(this);
-			  		$this.parents(".js-escale").remove();
-			  	});
-		  	});
-		 
-		   	$(".js-remove-escale").click(function() {
-		   		$this = $(this);
-		  		$this.parents(".js-escale").remove();
-		  	});
-
-		  	$(".js-form").submit(function() {
-		  		$(".js-escale-template").remove();
-		  	});
-
-		  	$(".js-plus-time").click(function() {
-		  		$this = $(this);
-		  		$input = $this.parents(".js-time-container").find(".js-time");
-		  		var time = parseInt($input.val());
-		  		if(time < 23){
-		  			time++;
-		  		}else{
-		  			time = 0;
-		  		}
-		  		$input.val(time);
-		  	});
-
-		  	$(".js-minus-time").click(function() {
-		  		$this = $(this);
-		  		$input = $this.parents(".js-time-container").find(".js-time");
-		  		var time = parseInt($input.val());
-		  		if(time < 1){
-		  			time = 23;
-		  		}else{
-		  			time--;
-		  		}
-		  		$input.val(time);
-		  	});
-
+			SharedApp.main.manageEscales();
+			new SharedApp.Views.Timepicker();
 		});
 	</script>
 <% end %>
 
-<% 
-	action = ""
-	method = ""
-	if ["new_line"].include? @action_name
-		action = create_line_path
-	elsif ["edit_line"].include? @action_name
-		action = update_line_path
-	end
-%>
-<%= form_tag action, method: "post", class:"js-form" do %>
-	H depart :<input type="text" class="js-time" name="line[heure_depart]" value="<%= @line.heure_depart if  @line%>" > <br>
-	H arrivé :<input type="text" class="js-time"  name="line[heure_arrive]" value="<%= @line.heure_arrive if  @line%>" > <br>
 
-	Car<select name="line[car_id]" >
-		<% current_user.cars.each do |car| %>
+<%= render "layouts/cover", cover: "/images/cover1.jpg" %>
+
+
+<div class="container">
+	
+
+	<div class="v-space-1"></div>
+	<div class="v-space-1"></div>
+	<div class="v-space-1"></div>
+
+	<% 
+		action = ""
+		method = ""
+		if ["new_line"].include? @action_name
+			action = create_line_path
+		elsif ["edit_line"].include? @action_name
+			action = update_line_path
+		end
+	%>
+	<%= form_tag action, method: "post", class:"js-form" do %>
+		<input type="text" class="js-time validate[required] pointer-cursor" placeholder="Heure depart" name="line[heure_depart]" value="<%= @line.heure_depart.strftime("%H:%M") if  @line%>"  readonly > 
+
+		<div class="v-space-1"></div>
+
+		<input type="text" class="js-time validate[required] pointer-cursor" placeholder="Heure arrivée"  name="line[heure_arrive]" value="<%= @line.heure_arrive.strftime("%H:%M") if  @line%>" readonly > 
+
+		<div class="v-space-1"></div>
+
+		<div class="label">Choisir un car</div>
+		<select name="line[car_token]" class="js-example-basic-single" >
+			<% current_user.cars.each do |car| %>
+			
+				<option value="<%= car.token %>" <%= "selected" if ["edit_line"].include?(@action_name) and @line.car.id == car.id %>><%=car.name%></option>
 		
-			<option value="<%= car.id %>" <%= "selected" if ["edit_line"].include? @action_name and @line.car.id == car.id %>><%=car.name%></option>
-		
-		
-		<% end %>
-	</select><br>
-
-	Depart<select name="escale[depart_ville_id]" >
-		<% @villes.each do |ville| %>
-			<option value="<%= ville.id %>" <%="selected" if  ["edit_line"].include? @action_name and @line.ville_depart.id == ville.id %> ><%=ville.name%></option>
-		<% end %>
-	</select><br> <br>
-
-	<button class="js-add-escale" type="button">
-		Add escale
-	</button>
-
-	<div class="js-escale-template js-escale" style="display:none">
-		escale<select name="escale[escale_ville_id][]" >
-			<% @villes.each do |ville| %>
-				<option value="<%= ville.id %>"><%=ville.name%></option>
 			<% end %>
-		</select><br>
-		<button type="button" class="js-remove-escale" >Remove</button>
-		<br>
-	</div>
+		</select>
+		<div class="v-space-1"></div>
 
-	<div class="js-escales">
- 		<% if ["edit_line"].include? @action_name %>
-	 	   <% @line.ville_escales.each_with_index do |escale, index| %>
-	 			<div class=" js-escale" >
-	 				escale_ <%= index + 1 %><select name="escale[escale_ville_id][]" >
-	 					<% @villes.each do |ville| %>
-	 						<option value="<%= ville.id %>" <%="selected" if ["edit_line"].include? @action_name  and escale.ville.id == ville.id %>><%=ville.name%></option>
-	 					<% end %>
-	 				</select><br>
-	 				<button type="button" class="js-remove-escale" >Remove</button>
-	 				<br>
-	 			</div>
-	 		<% end%>
- 		<% end%>
-	</div>
+		<div class="label">Ville de depart</div>
+		<select name="escale[depart_ville_id]" >
+			<% @villes.each do |ville| %>
+				<option value="<%= ville.id %>" <%="selected" if  ["edit_line"].include? @action_name and @line.ville_depart.id == ville.id %> ><%=ville.name%></option>
+			<% end %>
+		</select>
+		<div class="v-space-1"></div>
+		<button class="js-add-escale btn" type="button">
+			Ajouter un escale
+		</button>
+		<div class="v-space-1"></div>
+		<div class="v-space-1"></div>
+		<div class="v-space-1"></div>
+		<div class="js-escales">
+	 		<% if ["edit_line"].include? @action_name %>
+
+		 	   <% @line.ville_escales.each_with_index do |escale, index| %>
+
+		 	   		<input type="hidden" value="<%=escale.ville.id%>" class="js-escale-villes" >
+		 		<% end%>
+	 		<% end %>
+		</div>
+		<div class="v-space-1"></div>
+
+		
+		<div class="label">Ville d'arrivé</div>
+
+		<select name="escale[arrive_ville_id]" >
+			<%  @villes.each do |ville| %>
+				<option value="<%= ville.id %>" <%="selected" if ["edit_line"].include? @action_name and @line.ville_arrive.id == ville.id %> ><%=ville.name%></option>
+			<% end %>
+		</select>
+		<div class="v-space-1"></div>
+
+		<div class="label">Prix</div>
+			<input type="text" name="line[prix]" value="<%= @line.prix if  @line%>" class="validate[required,custom[number]]" > <br>
+			<% if ["new_line"].include? @action_name 
+				valeur = "Ajouter" 
+				elsif ["edit_line"].include? @action_name
+				valeur ="Modifier"
+		 end %>
+		
+		<div class="v-space-1"></div>
+		<input type="submit" class="btn" value="<%= valeur %>" ><br>
+	<% end %>
+
+</div>
 
 
-	Arrivé<select name="escale[arrive_ville_id]" >
-		<%  @villes.each do |ville| %>
-			<option value="<%= ville.id %>" <%="selected" if ["edit_line"].include? @action_name and @line.ville_arrive.id == ville.id %> ><%=ville.name%></option>
-		<% end %>
-	</select><br><br>
-
-	Prix<input type="text" name="line[prix]" value="<%= @line.prix if  @line%>" > <br>
-		<% if ["new_line"].include? @action_name 
-			valeur = "Ajouter" 
-			elsif ["edit_line"].include? @action_name
-			valeur ="Modifier"
-	 end %>
-	<input type="submit" value="<%= valeur %>" ><br>
-<% end %>
-
-<%= render "pages/timepicker" %>

@@ -1,13 +1,15 @@
 class UserController < ApplicationController
 
+	before_action  :check_login, only: [:signup, :create_user, :login, :new_session]
+
 	def signup
 		@action_name = "signup"
 	end
 
 	def create_user
-		user = User.signup(params) 
-		if user
-			session[:user_id] = user.id
+		result = User.signup(params) 
+		if result[:status] == 0
+			session[:user_id] = result[:user].id
 			redirect_to profile_path
 		else
 			redirect_to :back
@@ -19,12 +21,12 @@ class UserController < ApplicationController
 	end
 
 	def new_session
-		user = User.login(params)
-		if user
-			session[:user_id] = user.id
+		result = User.login(params)
+		if result[:status] == 0
+			session[:user_id] = result[:user].id
 			redirect_to profile_path
 		else
-			redirect_to signup_path
+			redirect_to :back
 		end
 	end
 
@@ -39,16 +41,19 @@ class UserController < ApplicationController
 
 
 	def edit_user
+		@action_name = "edit_profile"
 		@user = current_user
-		unless @user
-			redirect_to profile_path
-		end
+		redirect_to profile_path unless @user
 	end
 
 	def update_user
-		@user = current_user
-		@user.update_user(params)
-		redirect_to profile_path
+		result = current_user.update_user(params) 
+		return redirect_to profile_path if result[:status] == 0
+		redirect_to :back
+	end
+
+	def check_login
+		redirect_to profile_path if current_user 
 	end
 end
 

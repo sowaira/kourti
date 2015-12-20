@@ -1,0 +1,23 @@
+<%= content_for :js do %>
+	<script type="text/javascript">
+		$(function() {
+			SharedApp.main.manageComments("<%=@line.token%>", "Line");
+			SharedApp.main.submitComments("<%=@line.token%>", "Line");
+		});
+	</script>
+<% end %>
+
+<div class="container">
+	<div class="v-space-1"></div>
+	<div class="v-space-1"></div>
+
+	<%= @line.ville_depart.name%> ---> <%= @line.ville_arrive.name%> 
+	
+	<div class="v-space-1"></div>
+	<div class="js-comments"></div>
+
+	<div>
+		<%= render "layouts/comment_form" %>
+
+	</div>
+</div>

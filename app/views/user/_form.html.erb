@@ -1,3 +1,11 @@
+<%= content_for :js do %>
+	<script type="text/javascript">
+		$(function() {
+			SharedApp.main.manageTels();
+		});
+	</script>
+<% end %>
+
 <% 
 	action = ""
 	method = ""
@@ -5,30 +13,71 @@
 		action = create_user_path
 	elsif ["login"].include? @action_name
 		action = new_session_path
+	elsif ["edit_profile"].include? @action_name
+		action = update_user_path
 	end
 %>
-<%= form_tag action, method: "post" do %>
-	
-	<% if ["signup"].include? @action_name %>
-		Nom : <input type="text" name="user[name]" > <br>
-		Adresse :<input type="text" name="user[adresse]" ><br>
-		<select name="user[type_user]" >
-			<option value="0">Société</option>
-			<option value="1">Utilisateur normal</option>
-		</select><br>
-		Tel : <input type="text" name="user[tel][]" ><br>
-	<% end  %>
+<div class="container">
 
-	<% if ["login", "signup"].include? @action_name %>
-		Utilisateur : <input type="text" name="user[username]" ><br>
-		Mot de passe : <input type="password" name="user[password]" ><br>
-	<% end %>
-	<% if ["signup"].include? @action_name 
-		valeur = "Signup" 
-		elsif ["login"].include? @action_name
-		valeur ="Connexion"
-	 end %>
-	<input type="submit" value= "<%= valeur %>" ><br>
+		<div class="v-space-1"></div>
+		<div class="v-space-1"></div>
+		<div class="v-space-1"></div>
+			
+		<%= form_tag action, method: "post" do %>
+			<% if ["edit_profile","signup"].include? @action_name %>
+				<div class="label">Nom </div><input type="text" name="user[name]" value="<%= @user.name if @user %>" class="validate[required]"> 
+				<div class="v-space-1"></div>
+				<div class="v-space-1"></div>
+				<div class="label">Utilisateur </div> <input type="text" name="user[username]" value="<%= @user.username if @user %>"  class="validate[required]"  >
+				<div class="v-space-1"></div>
+				<div class="v-space-1"></div>
+				<div class="label">Adresse </div> <input type="text" value="<%= @user.adresse if @user%>" name="user[adresse]" class="">
+				<div class="v-space-1"></div>
+				<div class="v-space-1"></div>
+				<% if ["signup"].include? @action_name %>
+				<select name="user[type_user]" >
+					<option value="0">Société</option>
+					<option value="1">Utilisateur normal</option>
+				</select>
+				<div class="v-space-1"></div>
+				<div class="v-space-1"></div>
+				<%end%>
+				<div class="js-tels">
+				<% @user.tels.each do |tel| %>
+					<input type="hidden" value="<%=tel.number%>" class="js-user-tels validate[required,custom[phone]]" >
+				<% end if @user %>
+				</div>
+				<div class="v-space-1"></div>
+				<div class="v-space-1"></div>
+				<div class="v-space-1"></div>
+				<button type="button" class="js-add-tel btn" >Add tel</button>
+				<div class="v-space-1"></div>
+				<div class="v-space-1"></div>
+			<% end  %>
 
-<% end %>
+			<% if ["login", "signup","edit_profile"].include? @action_name %>
+					<div class="label">email </div> <input type="text" name="user[email]" value="<%= @user.email if @user%>" class="validate[required,custom[email]]"  >
+					<div class="v-space-1"></div>
+					<div class="v-space-1"></div>
+			<% end %>
+			
+			<% if ["login", "signup"].include? @action_name %>
+				<div class="label">Mot de passe </div> <input type="password" name="user[password]" class="validate[required,minSize[6]]" >
+				<div class="v-space-1"></div>
+				<div class="v-space-1"></div>
+			<% end %>
+
+			<% if ["signup"].include? @action_name 
+				valeur = "Signup" 
+				elsif ["login"].include? @action_name
+				valeur ="Connexion"
+				elsif ["edit_profile"].include? @action_name
+				valeur ="Modifier"
+			end %>
+			<input type="submit" value= "<%= valeur %>" class=" btn" ><br>
+		<% end %>
+		<div class="v-space-1 float-left"></div>
+		<div class="v-space-1 float-left"></div>
+		<div class="v-space-1 float-left"></div>
+</div>
 

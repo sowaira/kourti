@@ -1,0 +1,15 @@
+<div class="js-tel">
+	<div class="label">
+		<% if (index !== undefined) { %>
+			Tel N° <%= index + 1 %>
+		<% } else { %>
+			Saisir le Tel
+		<% } %>
+	</div>
+	<input type="text" value="<%=number%>" name="user[tel_numbers][]" >
+	<button type="button" class="js-remove-tel btn">Supprimer ce N°</button>
+	<div class="v-space-1"></div>
+	<div class="v-space-1"></div>
+	<div class="v-space-1"></div>
+</div>
+	

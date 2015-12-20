@@ -1,0 +1,43 @@
+.header {
+	width: 100%;
+	height:$height-bars;
+	background-color:$color-1;
+}
+
+.footer {
+	width: 100%;
+	height:$height-bars;
+	background-color:$color-1;
+	position:absolute;
+	bottom:0;
+    float: left;
+}
+
+.logo{
+	width: 14%;
+    height: 100%;
+    margin-left: 3%;
+}
+
+.menu_item{
+	color: $color-menu;
+    float: right;
+    margin-right: 3%;
+    text-decoration: none;
+    line-height: $height-bars;
+}
+
+.copyright{
+	color: $color-menu;
+    float: left;
+    line-height: $height-bars;
+    margin-left: 11%;
+}
+
+.contactus{
+	color: $color-menu;
+    float: right;
+    line-height: $height-bars;
+    margin-right: 11%;
+    text-decoration: none;
+}

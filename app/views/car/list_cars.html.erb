@@ -1,7 +1,38 @@
-
-
-<% @cars.each do |car| %>
-	<%= car.name %> <%= link_to "Edit", edit_car_path(car.id) %> <%= link_to "Remove", remove_car_path(car.id) %>  <br> 
+<%= content_for :js do %>
+	<script type="text/javascript">
+		$(function() {
+			SharedApp.main.submitNote("Car");
+		});
+	</script>
 <% end %>
- 
 
+
+<div class="container">
+	<div class="v-space-1"></div>
+	<% if @user and @user.societe? %>
+		<%= link_to "Create new car", create_car_path %>
+	<% end %>
+	<div class="v-space-1"></div>
+	<% @cars.each do |car| %>
+	<div class="width-1 float-left bloc-line js-car">
+		<div class="label"><%= car.name %></div>
+		<% if @user and @user.societe? and @user.owner_of?(car) %> 
+			<%= link_to "Edit", edit_car_path(car.token) %> <%= link_to "Remove", remove_car_path(car.token) %> 
+		<% end %>
+		<%= link_to "Show comments", show_car_path(car.token) %>
+		<div class="width-1 float-right text-right j">
+			<span class="js-likes"><%=car.likes.size%></span> likes, <span class="js-dislikes"><%=car.dislikes.size%></span> dislikes
+		</div>
+		<% if not current_user or not current_user.liked?("Car", car) %>
+			<div class="width-1 float-right text-right">
+				<button class="js-like-submit" data-type-action="0" data-car-token="<%= car.token %>">Like</button>
+				<button class="js-like-submit" data-type-action="1" data-car-token="<%= car.token %>">Dislike</button>
+			</div>
+		<% end %> 
+	</div>
+	<div class="v-space-1"></div>
+	<div class="v-space-1"></div>
+	<div class="v-space-1"></div>
+	<% end if @cars %>
+</div>
+	

@@ -7,6 +7,9 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+COMMENT_CLASSES = ["Car", "Line"]
+LIKE_CLASSES = ["Car", "Line"]
+
 module Kourti
   class Application < Rails::Application
     config.autoload_paths += %W(#{config.root}/lib)

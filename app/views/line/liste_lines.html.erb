@@ -1,15 +1,59 @@
-
-<% @lines.each do |line| %>
-	<% if line.escales.size != 0 %>
-		<%= line.heure_depart.strftime("%H:%M") %> , <%= line.heure_arrive.strftime("%H:%M") %> , <%= line.prix%> DHs , <%= line.ville_depart.name%> ---> <%= line.ville_arrive.name%> 
-	<% end %>
-	<%= link_to "Modifier", edit_line_path(line.id) %>
-	<%= link_to "Supprimer", remove_line_path(line.id) %>
-	<br>
-	<% line.escales.order("order_escale asc").each do |escale| %>
-		<%= escale.ville.name %> ---> 
-	<% end %> 
-<br>
------------------------------------------------
-<br>
+<%= content_for :js do %>
+	<script type="text/javascript">
+		$(function() {
+			SharedApp.main.submitNote("Line");
+		});
+	</script>
 <% end %>
+
+<div class="container">
+	<div class="v-space-1"></div>
+	<% if @user and @user.societe? %>
+		<%= link_to "Create new line", create_line_path %>
+	<% end %>
+	<div class="v-space-1"></div>
+	<% @lines.each_with_index do |line , index| %>
+		<% if line.escales.size != 0 %>
+			<% if line.escales.size > 1 %>
+				<div class="label">Line N° <%= index + 1 %></div>
+			<% end%>
+			<div class="width-1 float-left bloc-line js-line">
+				<div class="width-2 float-left">
+					<div class="label">Heure de depart</div><%= line.heure_depart.strftime("%H:%M") %>
+					<div class="label">Prix</div><%= line.prix%> Dhs
+					<div class="label">Traget</div>
+					<% line.escales.order("order_escale asc").each do |escale| %>
+						<%= escale.ville.name %> ---> 
+					<% end %>
+				</div>
+				<div class="width-2 float-right">
+					<div class="label">Heure d'arrivé</div> <%= line.heure_arrive.strftime("%H:%M") %>
+					<div class="label">Depart & Arrivée</div><%= line.ville_depart.name%> ---> <%= line.ville_arrive.name%> 
+					<div class="v-space-1"></div>
+					<div class="v-space-1"></div>
+					<div class="float-right">
+						<%= link_to "Show", show_line_path(line.token) %>
+						<% if @user and @user.societe? and @user.owner_of?(line.car)  %>
+							<%= link_to "Modifier", edit_line_path(line.token) %>
+							<%= link_to "Supprimer", remove_line_path(line.token) %>
+						<% end %>
+					</div> 
+				</div>
+				<div class="width-1 float-right text-right">
+					<span class="js-likes"><%=line.likes.size%></span> likes, <span class="js-dislikes"><%=line.dislikes.size%></span> dislikes
+				</div>
+
+				<% if not current_user or not current_user.liked?("Line", line) %>
+					<div class="width-1 float-right text-right">
+						<button class="js-like-submit" data-type-action="0" data-line-token="<%= line.token %>">Like</button>
+						<button class="js-like-submit" data-type-action="1" data-line-token="<%= line.token %>">Dislike</button>
+					</div>
+				<% end %> 
+			</div>
+			<div class="v-space-1 float-left" ></div>
+			<div class="v-space-1 float-left"></div>
+			<div class="v-space-1 float-left"></div>
+			<div class="v-space-1 float-left"></div>
+		<% end %>		
+	<% end %>
+</div>

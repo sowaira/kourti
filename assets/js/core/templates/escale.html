@@ -1,6 +1,18 @@
-escale
-<select name="escale[escale_ville_id][]" >
-	<% for (i = 0; i< villes.length; i++){ %>
-		<option value="<%= villes[i].id %>"><%=ville.name%></option>
-	<%  } %>
-</select><br>
+<div class="js-escale">
+	escale
+	<div class="padding-right-1 position-relative">
+		<select name="escale[escale_ville_id][]" >
+			<% for (i = 0; i< SVALS.villes.length; i++){ 
+				selected = "";
+				if ((selected_ville_id !== undefined) && selected_ville_id === SVALS.villes[i].id){
+					selected = "selected";
+				}
+
+				%>
+
+				<option value="<%= SVALS.villes[i].id %>" <%=selected%> ><%=SVALS.villes[i].name%></option>
+			<%  } %>
+		</select>
+		<button type="button" class="btn-controle js-remove-escale" >-</button>
+	</div>
+</div>

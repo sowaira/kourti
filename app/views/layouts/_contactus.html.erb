@@ -1,0 +1,18 @@
+<div id="test-popup" class="white-popup mfp-hide">
+  	<%= form_tag create_msg_path, method: "post" do %>
+		<div class="label">Nom </div><input type="text" name="message[name]" class="validate[required,message[name]]" > 
+		<div class="v-space-1"></div>
+		<div class="v-space-1"></div>
+		<div class="label">Email</div> <input type="text" name="message[email]" class="validate[required,custom[email]]">
+		<div class="v-space-1"></div>
+		<div class="v-space-1"></div>
+		<div class="label">Message </div><textarea name="message[message]" class="validate[required,message[name]]" ></textarea>
+		<div class="v-space-1 float-left"></div>
+		<div class="v-space-1 float-left"></div>
+		<div class="v-space-1 float-left"></div>
+		<input type="submit" value= "Envoyer" class=" btn-send" ><br>
+	<% end %>
+	<div class="v-space-1 float-left"></div>
+	<div class="v-space-1 float-left"></div>
+	<div class="v-space-1 float-left"></div>
+</div>

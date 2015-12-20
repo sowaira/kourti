@@ -3,18 +3,41 @@
 <head>
   <title>Kourti</title>
   <link rel="stylesheet" href="<%= assets_path('css/screen.css') %>">
-
-  <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%= csrf_meta_tag %>
 </head>
+
+
 <body>
 
-<%= yield %>
+  <script type="text/javascript">
+    window.SVALS = {
+      villes : [
+      <% Ville.all.each do |ville| %>
+        {"name":"<%= ville.name%>","id":"<%= ville.id%>"},
+      <% end %>]
+      ,
+    }
+  </script>
+
+
+  <div class="wrapper">
+    <!-- <div class="content"> -->
+    <%= render "layouts/header" %>
+    
+    <%= yield %>
+
+    <%= render "layouts/footer" %>
+
+    <!-- </div> -->
+  </div>
 
 
   <script type="text/javascript" src="<%= assets_path('js/lib.js') %>"></script>
   <script type="text/javascript" src="<%= assets_path('js/templates.js') %>"></script>
   <script type="text/javascript" src="<%= assets_path('js/core.js') %>"></script>
-  <script type="text/javascript">
+    <script type="text/javascript">
+      new SharedApp.Views.Shared();
       SharedApp.main.init();
   </script>
 

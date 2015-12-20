@@ -2,23 +2,26 @@
 	action = ""
 	method = ""
 
-
 	if ["new_car"].include? @action_name
 		action = create_car_path
 	elsif ["edit_car"].include? @action_name
 		action = update_car_path
 	end
 %>
-<%= form_tag action, method: "post" do %>
-	 Nom : <input type="text" name="car[name]" value="<%= @car.name if  @car%>" > <br>
-
-	<% if ["new_car"].include? @action_name 
-		valeur = "Ajouter" 
-		elsif ["edit_car"].include? @action_name
-		valeur ="Modifier"
-	 end %>
-	<input type="submit" value= "<%= valeur %>" ><br>
-<% end %>
-
-<%= link_to 'return to profile', profile_path %>
-
+<div class="container">
+	<div class="v-space-1"></div>
+	<div class="v-space-1"></div>
+	<%= form_tag action, method: "post" do %>
+		<div class="label">Nom</div><input type="text" name="car[name]" class="validate[required]" value="<%= @car.name if  @car%>" >
+		<div class="v-space-1"></div>
+		<% if ["new_car"].include? @action_name 
+			valeur = "Ajouter" 
+			elsif ["edit_car"].include? @action_name
+			valeur ="Modifier"
+		 end %>
+		<input type="submit" value= "<%= valeur %>" class="btn" >
+		<div class="v-space-1"></div>
+	<% end %>
+	<%= link_to "Go to list of cars", list_cars_path %>
+	
+</div>

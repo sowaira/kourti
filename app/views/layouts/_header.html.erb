@@ -1,0 +1,18 @@
+<div class="header">
+	<a  href="/home"><img src="/images/test.jpg" alt="test" class="logo" /></a>
+	<% if current_user %>
+		<% if current_user.societe? %>
+			<%= link_to "My cars", user_cars_path(current_user.id) , class:"menu_item"   %>
+			<%= link_to "My lines", user_lines_path(current_user.id) , class:"menu_item" %>
+			<%= link_to "profile", profile_path , class:"menu_item" %>
+		<% end %>
+		<%= link_to "Sign out", logout_path , class:"menu_item", :method => :delete   %>
+	<% else %>	
+		<%= link_to  "Login", login_path , class:"menu_item" %>
+		<%= link_to "Sign Up", signup_path , class:"menu_item"  %>
+	<% end %>
+	<% if current_user %>
+		<%= link_to "Cars", list_cars_path , class:"menu_item" %>
+		<%= link_to "Lines", liste_lines_path , class:"menu_item" %>
+	<% end %>
+</div>

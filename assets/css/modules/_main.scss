@@ -1,0 +1,48 @@
+* {
+	@include box-sizing(border-box);
+}
+html, body {
+	width:100%;
+	height:100%;
+	margin:0;
+	font-family: myFont;
+}
+
+.wrapper {
+	width:100%;
+	min-height:100%;
+	margin:0;
+	position:relative;
+	padding-bottom: 70px;
+    float: left;
+}
+
+
+.container {
+	max-width:$container-width;
+	width:100%;
+	padding-left:20px;
+	padding-right: 20px;
+	margin:0 auto;
+}
+
+.bloc-line {
+	    border-style: solid;
+	    padding: 5px 5px 5px 5px;
+	    border-width: thin;
+}
+
+.white-popup {
+  position: relative;
+  background: #FFF;
+  padding: 20px;
+  width:auto;
+  max-width: 500px;
+  margin: 20px auto;
+}
+
+.comment-item {
+	width:100%;
+	padding:20px;
+	border: 1px solid $color-1;
+}

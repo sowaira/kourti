@@ -1,0 +1,1 @@
+var Tel = Backbone.Model.extend({});
