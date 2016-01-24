@@ -39,7 +39,7 @@ gem "ffaker", '~> 1.25.0'
 gem "rack-noindex"
 gem 'active_link_to', '~> 1.0.0'
 
-gem 'google-api-client', :require => 'google/api_client'
+# gem 'google-api-client', :require => 'google/api_client'
 
 gem "private_pub"
 
