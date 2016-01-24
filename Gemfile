@@ -15,7 +15,6 @@ gem 'rails', '4.2.1'
 
 
 
-gem 'devise', '~> 3.2.2'
 gem 'rest-client', '~> 1.7.3'
 gem 'active_model_serializers' , '~> 0.8.1'
 
