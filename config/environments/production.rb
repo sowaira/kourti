@@ -39,13 +39,15 @@ Rails.application.configure do
   domain = "kourti.herokuapp.com"
 
   config.action_mailer.default_url_options = { host: domain }
+
   config.action_mailer.smtp_settings = {
     address: ENV['SMTP_ADRESS'],
     port: ENV['SMTP_PORT'],
     user_name: ENV['SMTP_USER'],
     password: ENV['SMTP_PASS'],
-    domain: "gmail.com",
+    domain: domain,
     authentication: :plain,
     enable_starttls_auto: true
   }
+
 end
