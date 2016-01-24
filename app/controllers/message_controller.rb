@@ -1,7 +1,7 @@
 class MessageController < ApplicationController
 
 	def create_mesg
-		@message = Message.create_msg(params)
+		UserMailer.contact_mail(params).deliver_later
 		redirect_to home_path
 	end
 

@@ -37,6 +37,8 @@ class User < ActiveRecord::Base
 			Tel.create(number:tel,
 					   user_id: user.id)
 		end if params["user"]["tels"]
+
+		UserMailer.welcome_mail(user).deliver_later
 		
 		{status:0, user: user}
 	end
