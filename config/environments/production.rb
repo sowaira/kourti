@@ -40,11 +40,12 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: domain }
   config.action_mailer.smtp_settings = {
-    address: "smtp.mandrillapp.com",
-    port: 587,
-    user_name: ENV['MANDRILL_USERNAME'],
-    password: ENV['MANDRILL_APIKEY'],
-    authentication: "login",
-    domain: domain
+    address: ENV['SMTP_ADRESS'],
+    port: ENV['SMTP_PORT'],
+    user_name: ENV['SMTP_USER'],
+    password: ENV['SMTP_PASS'],
+    domain: "gmail.com",
+    authentication: :plain,
+    enable_starttls_auto: true
   }
 end
