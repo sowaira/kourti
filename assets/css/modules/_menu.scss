@@ -1,13 +1,13 @@
 .header {
 	width: 100%;
-	height:$height-bars;
+	height:$height-header;
 	background-color:$color-1;
 }
 
 .footer {
 	width: 100%;
-	height:$height-bars;
-	background-color:$color-1;
+	height:$height-footer;
+	background-color:$color-1-bis-1;
 	position:absolute;
 	bottom:0;
     float: left;
@@ -20,24 +20,24 @@
 }
 
 .menu_item{
-	color: $color-menu;
+	color: $color-3;
     float: right;
     margin-right: 3%;
     text-decoration: none;
-    line-height: $height-bars;
+    line-height: $height-header;
 }
 
 .copyright{
-	color: $color-menu;
+	color: $color-3;
     float: left;
-    line-height: $height-bars;
+    line-height: $height-header;
     margin-left: 11%;
 }
 
 .contactus{
-	color: $color-menu;
+	color: $color-3;
     float: right;
-    line-height: $height-bars;
+    line-height: $height-header;
     margin-right: 11%;
     text-decoration: none;
 }

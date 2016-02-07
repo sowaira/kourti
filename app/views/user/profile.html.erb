@@ -1,12 +1,18 @@
+
+
 <div class="container">
+
+
 
 
 <%= @user.username %>
 <% if @user.societe? %>
 	<%= link_to "Ajouter un nouveau car", new_car_path %>
 	<%= link_to "Ajouter une ligne", new_line_path %>
+
 <%end%>
 
 <%= link_to "Modifier le profile", edit_user_path %>
 
+<div class="profile-image right-text js-profile-photo" style="background-image:url(<%=@user.cover_image%>)"></div>
 </div>

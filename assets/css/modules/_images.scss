@@ -1,0 +1,26 @@
+
+.profile-image {
+	position: relative;
+	background-image: url(/images/default-thumb.png);
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	width: 150px;
+	height: 150px;
+	padding: 10px;
+	color: $color-1-bis-1;
+	border: 1px solid $color-1-bis-2;
+	.fa-pencil-square-o {
+		font-size: 20px;
+	}
+	.spinner {
+		display: none;
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 49px;
+		bottom: 0;
+		margin: 0 auto;
+		width: 50px;
+	}
+}

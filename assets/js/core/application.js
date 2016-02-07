@@ -106,6 +106,28 @@ SharedApp.main = {
 				}
 			});
 		});
+	},
+
+	uploadProfileImage: function () {
+		$(".js-modify-photo").click(function() {
+			$(".js-profile-photo-upload .cloudinary_fileupload").click();
+		});
+
+		$(".js-profile-photo-upload .cloudinary_fileupload").unsigned_cloudinary_upload("n2x0h8b1",
+		  { tags: "kourti" },
+		  { multiple: true }
+		).bind("cloudinarydone", function(e, data) {
+		  $(".js-profile-photo").css("background-image", "url("+data.result.url+")");
+		  $(".js-profile-photo-value").val(data.result.url);
+		  $(".js-modify-photo").show();
+		  $(".js-photo-spinner").hide();
+		  
+		}).bind("fileuploadprogress", function(e, data) {
+		    console.log(data.loaded);
+		    $(".js-modify-photo").hide();
+		    $(".js-photo-spinner").show();
+		});
+
 	}
 
 };

@@ -3,8 +3,10 @@
 <head>
   <title>Kourti</title>
   <link rel="stylesheet" href="<%= assets_path('css/screen.css') %>">
+  <link rel="stylesheet" href="/fonts/font-awesome/css/font-awesome.min.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <%= csrf_meta_tag %>
+
 </head>
 
 
@@ -40,7 +42,8 @@
       new SharedApp.Views.Shared();
       SharedApp.main.init();
   </script>
+  <%= cloudinary_js_config %>
 
-	<%= yield :js %>
+  <%= yield :js %>
 </body>
 </html>

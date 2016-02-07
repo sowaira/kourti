@@ -1571,7 +1571,7 @@ html, body {
   min-height: 100%;
   margin: 0;
   position: relative;
-  padding-bottom: 70px;
+  padding-bottom: 120px;
   float: left; }
 
 .container {
@@ -1597,17 +1597,17 @@ html, body {
 .comment-item {
   width: 100%;
   padding: 20px;
-  border: 1px solid #114B5F; }
+  border: 1px solid #F67F25; }
 
 .header {
   width: 100%;
-  height: 70px;
-  background-color: #114B5F; }
+  height: 45px;
+  background-color: #F67F25; }
 
 .footer {
   width: 100%;
-  height: 70px;
-  background-color: #114B5F;
+  height: 120px;
+  background-color: #F29853;
   position: absolute;
   bottom: 0;
   float: left; }
@@ -1618,22 +1618,22 @@ html, body {
   margin-left: 3%; }
 
 .menu_item {
-  color: #F5F5DC;
+  color: white;
   float: right;
   margin-right: 3%;
   text-decoration: none;
-  line-height: 70px; }
+  line-height: 45px; }
 
 .copyright {
-  color: #F5F5DC;
+  color: white;
   float: left;
-  line-height: 70px;
+  line-height: 45px;
   margin-left: 11%; }
 
 .contactus {
-  color: #F5F5DC;
+  color: white;
   float: right;
-  line-height: 70px;
+  line-height: 45px;
   margin-right: 11%;
   text-decoration: none; }
 
@@ -1658,7 +1658,7 @@ select {
   right: 0;
   top: 0;
   height: 100%;
-  background: #114B5F;
+  background: #F67F25;
   border: 0; }
 
 .btn-send {
@@ -1724,6 +1724,12 @@ option {
 .center-text {
   text-align: center; }
 
+.left-text {
+  text-align: left; }
+
+.right-text {
+  text-align: right; }
+
 .padding-right-1 {
   padding-right: 70px; }
 
@@ -1732,3 +1738,26 @@ option {
 
 .pointer-cursor {
   cursor: pointer; }
+
+.profile-image {
+  position: relative;
+  background-image: url(/images/default-thumb.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 150px;
+  height: 150px;
+  padding: 10px;
+  color: #F29853;
+  border: 1px solid #FED6AE; }
+  .profile-image .fa-pencil-square-o {
+    font-size: 20px; }
+  .profile-image .spinner {
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 49px;
+    bottom: 0;
+    margin: 0 auto;
+    width: 50px; }

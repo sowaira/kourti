@@ -70,7 +70,8 @@ class User < ActiveRecord::Base
 	def update_user(params)
 		check_params = GlobalOperations.missing_params?(params["user"]["email"],
 										 params["user"]["name"],
-										 params["user"]["username"])
+										 params["user"]["username"],
+										 params["user"]["image_link"])
 
 		return {status:1} unless check_params
 		return {status:1} unless GlobalOperations.email_valid?(params["user"]["email"])
@@ -81,6 +82,11 @@ class User < ActiveRecord::Base
 					adresse: params["user"]["adresse"]
 					)
 
+		image = Image.find_by(object_id: self.id, class_name:"User", image_type:0)
+
+		Image.create(object_id: self.id, class_name:"User", link:params["user"]["image_link"], image_type:0) unless image
+		image.update(object_id: self.id, class_name:"User", link:params["user"]["image_link"], image_type:0) if image
+		
 		self.tels.destroy_all
 		params["user"]["tel_numbers"].each_with_index do |tel|
 			Tel.create(number:tel, user_id: self.id) if GlobalOperations.number?(tel)
@@ -94,6 +100,12 @@ class User < ActiveRecord::Base
 
 	def liked?(class_name, obj)
 		!!self.likes.find_by(class_name: class_name, object_id: obj.id)
+	end
+
+	def cover_image
+		image = Image.find_by(class_name: "User", object_id: self.id, image_type:0)
+		image_link = image.link if image
+		image_link || "/images/default-thumb.png"
 	end
 
 end

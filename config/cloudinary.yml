@@ -1,0 +1,19 @@
+
+development:
+  cloud_name: dily62rw2
+  api_key: '154396746469989'
+  api_secret: bp_9_KLzNQ6GIx0_1tApF0zsBD0
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: dily62rw2
+  api_key: '154396746469989'
+  api_secret: bp_9_KLzNQ6GIx0_1tApF0zsBD0
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: dily62rw2
+  api_key: '154396746469989'
+  api_secret: bp_9_KLzNQ6GIx0_1tApF0zsBD0
+  enhance_image_tag: true
+  static_image_support: false

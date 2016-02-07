@@ -2,6 +2,7 @@
 	<script type="text/javascript">
 		$(function() {
 			SharedApp.main.manageTels();
+			SharedApp.main.uploadProfileImage();
 		});
 	</script>
 <% end %>
@@ -24,6 +25,18 @@
 		<div class="v-space-1"></div>
 			
 		<%= form_tag action, method: "post" do %>
+			<% if ["edit_profile"].include? @action_name %>
+				<div class="profile-image right-text js-profile-photo" style="background-image:url(<%=@user.cover_image%>)" >
+					<i class="fa fa-pencil-square-o pointer-cursor js-modify-photo"></i>
+					<img src="/images/spinner.gif" class="spinner  js-photo-spinner">
+				</div>
+				<div class="js-profile-photo-upload">
+					<input type="file" name="file" class="cloudinary_fileupload" style="display:none">
+				</div>
+				<input type="hidden" name="user[image_link]" class="js-profile-photo-value">
+				<div class="v-space-1"></div>
+				<div class="v-space-1"></div>
+			<% end %>
 			<% if ["edit_profile","signup"].include? @action_name %>
 				<div class="label">Nom </div><input type="text" name="user[name]" value="<%= @user.name if @user %>" class="validate[required]"> 
 				<div class="v-space-1"></div>

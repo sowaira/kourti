@@ -3,15 +3,10 @@
   "css/lib/_jquery-comments.css": "css/lib/_jquery-comments.20651d2662.css",
   "css/lib/_magnific-popup.css": "css/lib/_magnific-popup.c70dbd9737.css",
   "css/lib/_select2.css": "css/lib/_select2.d8c47a709d.css",
-  "css/screen.css": "css/screen.3fc1c67767.css",
-  "fonts/FontAwesome.otf": "fonts/FontAwesome.f27a303297.otf",
+  "css/screen.css": "css/screen.9d58fee8f3.css",
   "fonts/OpenSans-Regular.ttf": "fonts/OpenSans-Regular.a9f016eae0.ttf",
-  "fonts/fontawesome-webfont.eot": "fonts/fontawesome-webfont.106dbb47c7.eot",
-  "fonts/fontawesome-webfont.svg": "fonts/fontawesome-webfont.0a799148a5.svg",
-  "fonts/fontawesome-webfont.ttf": "fonts/fontawesome-webfont.db92c070cb.ttf",
-  "fonts/fontawesome-webfont.woff": "fonts/fontawesome-webfont.3e0a9e8f03.woff",
   "images/test.jpg": "images/test.f63cbfd4b2.jpg",
-  "js/core.js": "js/core.713b3943c3.js",
-  "js/lib.js": "js/lib.d898105d60.js",
+  "js/core.js": "js/core.3301732c69.js",
+  "js/lib.js": "js/lib.ef76df6f30.js",
   "js/templates.js": "js/templates.8637156b22.js"
 }
