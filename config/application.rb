@@ -9,6 +9,7 @@ Bundler.require(*Rails.groups)
 
 COMMENT_CLASSES = ["Car", "Line"]
 LIKE_CLASSES = ["Car", "Line"]
+DEFAULT_IMAGE = "/images/default-thumb.png"
 
 module Kourti
   class Application < Rails::Application

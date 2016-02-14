@@ -7,21 +7,36 @@ class Car < ActiveRecord::Base
 	before_create :gererate_secure_random
 
 	def self.create_car(params, current_user)
-		check_params = GlobalOperations.missing_params?(params["car"]["name"])
+		check_params = GlobalOperations.missing_params?(params["car"]["name"],
+														params["car"]["image_link"])
 
 		return {status:1} unless check_params
 
 		car = Car.create(name: params["car"]["name"],
 						 user_id: current_user.id,
 						 status: 0)
+
+		if DEFAULT_IMAGE != params["car"]["image_link"]
+			Image.create(object_id: car.id, class_name:"Car", link:params["car"]["image_link"], image_type:0)
+		end
+		
 		{status:0, car: car}
 	end
 
 	def update_car(params,current_user)
-		check_params = GlobalOperations.missing_params?(params["car"]["name"])
+		check_params = GlobalOperations.missing_params?(params["car"]["name"],
+														params["car"]["image_link"])
 		return {status:1} unless check_params
 
 		car = self.update(name: params["car"]["name"])
+
+		if DEFAULT_IMAGE != params["car"]["image_link"]
+			image = Image.find_by(object_id: self.id, class_name:"Car", image_type:0)
+	
+			Image.create(object_id: self.id, class_name:"Car", link:params["car"]["image_link"], image_type:0) unless image
+			image.update(object_id: self.id, class_name:"Car", link:params["car"]["image_link"], image_type:0) if image
+		end
+		
 		{status:0, car: car}
 	end
 

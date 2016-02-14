@@ -14,5 +14,5 @@
 
 <%= link_to "Modifier le profile", edit_user_path %>
 
-<div class="profile-image right-text js-profile-photo" style="background-image:url(<%=@user.cover_image%>)"></div>
+<div class="profile-image right-text js-profile-photo" style="background-image:url(<%=Image.url_of("User", @user, 0)%>)"></div>
 </div>

@@ -1,3 +1,11 @@
+<%= content_for :js do %>
+	<script type="text/javascript">
+		$(function() {
+			SharedApp.main.uploadImage();
+		});
+	</script>
+<% end %>
+
 <% 
 	action = ""
 	method = ""
@@ -8,10 +16,25 @@
 		action = update_car_path
 	end
 %>
+
 <div class="container">
+
 	<div class="v-space-1"></div>
 	<div class="v-space-1"></div>
+
+
 	<%= form_tag action, method: "post" do %>
+
+		<div class="car-cover right-text js-upload-photo-container" style="background-image:url(<%=Image.url_of("Car", @car, 0)%>)">
+			<i class="fa fa-pencil-square-o pointer-cursor js-upload-photo"></i>
+			<img src="/images/spinner.gif" class="spinner  js-upload-photo-spinner">
+			<input type="file" name="file" class="cloudinary_fileupload" style="display:none">
+			<input type="hidden" value="<%=Image.url_of("Car", @car, 0)%>" name="car[image_link]" class="js-upload-photo-value">
+		</div>
+
+		<div class="v-space-1"></div>
+		<div class="v-space-1"></div>
+
 		<div class="label">Nom</div><input type="text" name="car[name]" class="validate[required]" value="<%= @car.name if  @car%>" >
 		<div class="v-space-1"></div>
 		<% if ["new_car"].include? @action_name 
